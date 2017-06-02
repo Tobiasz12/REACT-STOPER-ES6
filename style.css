@@ -1,0 +1,25 @@
+.style {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    max-width: 600px;
+    max-height: 400;
+    background: #607D8B;
+    margin:0 auto;
+}
+nav {
+    font-size: 40px;
+    font-family: sans-serif;
+    padding: 15px;
+}
+a {
+    text-decoration: none;
+    color:#BBBBBB;
+}
+.stopwatch {
+    font-size: 60px;
+    color:#BBBBBB;
+    font-family: sans-serif;
+}
