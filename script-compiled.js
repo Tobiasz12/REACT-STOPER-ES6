@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -16,15 +16,16 @@ var Stopwatch = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Stopwatch.__proto__ || Object.getPrototypeOf(Stopwatch)).call(this, display, props));
 
-        _this.running = false;
-        _this.display = display;
-        _this.reset();
-        _this.print(_this.times);
+        _this.state = {
+            running: false,
+            display: '.stopwatch',
+            currentTime: _this.format(_this.times)
+        };
         return _this;
     }
 
     _createClass(Stopwatch, [{
-        key: 'reset',
+        key: "reset",
         value: function reset() {
             this.times = {
                 minutes: 0,
@@ -33,36 +34,36 @@ var Stopwatch = function (_React$Component) {
             };
         }
     }, {
-        key: 'print',
+        key: "print",
         value: function print() {
-            this.display.innerText = this.format(this.times);
+            this.setState({ currentTime: this.format(this.times) });
         }
     }, {
-        key: 'format',
+        key: "format",
         value: function format(times) {
-            return pad0(times.minutes) + ':' + pad0(times.seconds) + ':' + pad0(Math.floor(times.miliseconds));
+            return pad0(this.times.minutes) + ":" + pad0(this.times.seconds) + ":" + pad0(Math.floor(this.times.miliseconds));
         }
     }, {
-        key: 'start',
+        key: "start",
         value: function start() {
             var _this2 = this;
 
-            if (!this.running) {
-                this.running = true;
+            if (!this.state.running) {
+                this.state.running = true;
                 this.watch = setInterval(function () {
                     return _this2.step();
                 }, 10);
             }
         }
     }, {
-        key: 'step',
+        key: "step",
         value: function step() {
-            if (!this.running) return;
+            if (!this.state.running) return;
             this.calculate();
             this.print();
         }
     }, {
-        key: 'calculate',
+        key: "calculate",
         value: function calculate() {
             this.times.miliseconds += 1;
             if (this.times.miliseconds >= 100) {
@@ -75,10 +76,29 @@ var Stopwatch = function (_React$Component) {
             }
         }
     }, {
-        key: 'stop',
+        key: "stop",
         value: function stop() {
-            this.running = false;
+            this.setState({ running: false });
             clearInterval(this.watch);
+        }
+    }, {
+        key: "render",
+        value: function render() {
+            return React.createElement(
+                "div",
+                { className: "stopwatch" },
+                this.state.currentTime,
+                React.createElement(
+                    "button",
+                    { className: "button", onClick: this.start.bind(this) },
+                    "start"
+                ),
+                React.createElement(
+                    "button",
+                    { className: "button", onClick: this.stop.bind(this) },
+                    "stop"
+                )
+            );
         }
     }]);
 
@@ -93,13 +113,4 @@ function pad0(value) {
     return result;
 }
 
-var stopwatch = new Stopwatch(document.querySelector('.stopwatch'));
-
-var startButton = document.getElementById("start");
-startButton.addEventListener('click', function () {
-    stopwatch.start();
-});
-var stopButton = document.getElementById("stop");
-stopButton.addEventListener('click', function () {
-    stopwatch.stop();
-});
+ReactDOM.render(React.createElement(Stopwatch, null), document.getElementById('app'));

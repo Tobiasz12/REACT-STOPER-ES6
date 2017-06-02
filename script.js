@@ -3,8 +3,8 @@ class Stopwatch extends React.Component {
         super(display,props);
         this.state = {
             running: false,
-            display: display,
-
+            display: '.stopwatch',
+            currentTime: this.format(this.times)
         }
     }
 
@@ -17,22 +17,22 @@ class Stopwatch extends React.Component {
     }
 
     print() {
-        display: this.state.display.innerText = this.format(this.times)
+        this.setState({currentTime: this.format(this.times)})
     }
 
     format(times) {
-        return `${pad0(times.minutes)}:${pad0(times.seconds)}:${pad0(Math.floor(times.miliseconds))}`;
+        return `${pad0(this.times.minutes)}:${pad0(this.times.seconds)}:${pad0(Math.floor(this.times.miliseconds))}`;
     }
 
     start() {
-        if (!this.running) {
-            this.running = true;
+        if (!this.state.running) {
+            this.state.running = true;
             this.watch = setInterval(() => this.step(), 10);
         }
     }
 
     step() {
-        if (!this.running) return;
+        if (!this.state.running) return;
         this.calculate();
         this.print();
     }
@@ -50,15 +50,16 @@ class Stopwatch extends React.Component {
     }
 
     stop() {
-        this.running = false;
+        this.setState({running: false})
         clearInterval(this.watch);
     }
 
     render() {
         return (
             <div className="stopwatch">
-                <button className="button" onClick={this.start.bind(this)}>start</Button>
-                <button className="button" onClick={this.stop.bind(this)}>stop</Button>
+            {this.state.currentTime}
+                <button className="button" onClick={this.start.bind(this)}>start</button>
+                <button className="button" onClick={this.stop.bind(this)}>stop</button>
             </div>
         )
     }
