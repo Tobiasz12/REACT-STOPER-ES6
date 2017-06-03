@@ -1,4 +1,4 @@
-.style {
+.stopwatch {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,8 +8,11 @@
     max-height: 400;
     background: #607D8B;
     margin:0 auto;
+    font-size: 60px;
+    color:#BBBBBB;
+    font-family: sans-serif;
 }
-nav {
+.controls {
     font-size: 40px;
     font-family: sans-serif;
     padding: 15px;
@@ -17,9 +20,6 @@ nav {
 a {
     text-decoration: none;
     color:#BBBBBB;
-}
-.stopwatch {
-    font-size: 60px;
-    color:#BBBBBB;
-    font-family: sans-serif;
+    cursor:pointer;
+    margin-left: 10px;
 }

@@ -1,6 +1,7 @@
 class Stopwatch extends React.Component {
-    constructor(display,props) {
-        super(display,props);
+    constructor() {
+        super();
+        this.reset();
         this.state = {
             running: false,
             display: '.stopwatch',
@@ -17,7 +18,7 @@ class Stopwatch extends React.Component {
     }
 
     print() {
-        this.setState({currentTime: this.format(this.times)})
+        this.setState({currentTime: this.format(this.times)});
     }
 
     format(times) {
@@ -57,9 +58,11 @@ class Stopwatch extends React.Component {
     render() {
         return (
             <div className="stopwatch">
-            {this.state.currentTime}
-                <button className="button" onClick={this.start.bind(this)}>start</button>
-                <button className="button" onClick={this.stop.bind(this)}>stop</button>
+                <div className="controls">
+                    <a className="button" onClick={this.start.bind(this)}>Start</a>
+                    <a className="button" onClick={this.stop.bind(this)}>Stop</a>
+                </div>
+                {this.state.currentTime}
             </div>
         )
     }

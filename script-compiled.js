@@ -11,11 +11,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Stopwatch = function (_React$Component) {
     _inherits(Stopwatch, _React$Component);
 
-    function Stopwatch(display, props) {
+    function Stopwatch() {
         _classCallCheck(this, Stopwatch);
 
-        var _this = _possibleConstructorReturn(this, (Stopwatch.__proto__ || Object.getPrototypeOf(Stopwatch)).call(this, display, props));
+        var _this = _possibleConstructorReturn(this, (Stopwatch.__proto__ || Object.getPrototypeOf(Stopwatch)).call(this));
 
+        _this.reset();
         _this.state = {
             running: false,
             display: '.stopwatch',
@@ -87,17 +88,21 @@ var Stopwatch = function (_React$Component) {
             return React.createElement(
                 "div",
                 { className: "stopwatch" },
-                this.state.currentTime,
                 React.createElement(
-                    "button",
-                    { className: "button", onClick: this.start.bind(this) },
-                    "start"
+                    "div",
+                    { className: "controls" },
+                    React.createElement(
+                        "a",
+                        { className: "button", onClick: this.start.bind(this) },
+                        "Start"
+                    ),
+                    React.createElement(
+                        "a",
+                        { className: "button", onClick: this.stop.bind(this) },
+                        "Stop"
+                    )
                 ),
-                React.createElement(
-                    "button",
-                    { className: "button", onClick: this.stop.bind(this) },
-                    "stop"
-                )
+                this.state.currentTime
             );
         }
     }]);
