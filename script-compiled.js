@@ -93,6 +93,8 @@ var Stopwatch = function (_React$Component) {
     }, {
         key: "render",
         value: function render() {
+            var _this3 = this;
+
             return React.createElement(
                 "div",
                 { className: "stopwatch" },
@@ -123,7 +125,7 @@ var Stopwatch = function (_React$Component) {
                         return React.createElement(
                             "li",
                             { className: "stopwatch-lap" },
-                            print(lap)
+                            _this3.format(lap)
                         );
                     })
                 )

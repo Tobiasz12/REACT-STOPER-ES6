@@ -73,7 +73,7 @@ class Stopwatch extends React.Component {
                 {this.state.currentTime}
                 <ul className="stopwatch-laps">
                     {this.state.laps.map((lap) =>
-                        <li className="stopwatch-lap">{print(lap)}</li>)
+                        <li className="stopwatch-lap">{this.format(lap)}</li>)
                     }
                 </ul>
             </div>
