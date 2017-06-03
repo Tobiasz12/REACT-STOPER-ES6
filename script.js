@@ -5,6 +5,7 @@ class Stopwatch extends React.Component {
         this.state = {
             running: false,
             display: '.stopwatch',
+            laps: [],
             currentTime: this.format(this.times)
         }
     }
@@ -55,18 +56,29 @@ class Stopwatch extends React.Component {
         clearInterval(this.watch);
     }
 
+    LabClick() {
+        this.setState({
+      laps: this.state.laps.concat([this.state.currentTime])
+    })
+    }
+
     render() {
         return (
             <div className="stopwatch">
                 <div className="controls">
                     <a className="button" onClick={this.start.bind(this)}>Start</a>
                     <a className="button" onClick={this.stop.bind(this)}>Stop</a>
+                    <a className="button" onClick={this.LabClick.bind(this)}>Lap</a>
                 </div>
                 {this.state.currentTime}
+                <ul className="stopwatch-laps">
+                    {this.state.laps.map((lap) =>
+                        <li className="stopwatch-lap">{print(lap)}</li>)
+                    }
+                </ul>
             </div>
         )
     }
-
 }
 
 function pad0(value) {

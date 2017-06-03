@@ -20,6 +20,7 @@ var Stopwatch = function (_React$Component) {
         _this.state = {
             running: false,
             display: '.stopwatch',
+            laps: [],
             currentTime: _this.format(_this.times)
         };
         return _this;
@@ -83,6 +84,13 @@ var Stopwatch = function (_React$Component) {
             clearInterval(this.watch);
         }
     }, {
+        key: "LabClick",
+        value: function LabClick() {
+            this.setState({
+                laps: this.state.laps.concat([this.state.currentTime])
+            });
+        }
+    }, {
         key: "render",
         value: function render() {
             return React.createElement(
@@ -100,9 +108,25 @@ var Stopwatch = function (_React$Component) {
                         "a",
                         { className: "button", onClick: this.stop.bind(this) },
                         "Stop"
+                    ),
+                    React.createElement(
+                        "a",
+                        { className: "button", onClick: this.LabClick.bind(this) },
+                        "Lap"
                     )
                 ),
-                this.state.currentTime
+                this.state.currentTime,
+                React.createElement(
+                    "ul",
+                    { className: "stopwatch-laps" },
+                    this.state.laps.map(function (lap) {
+                        return React.createElement(
+                            "li",
+                            { className: "stopwatch-lap" },
+                            print(lap)
+                        );
+                    })
+                )
             );
         }
     }]);
