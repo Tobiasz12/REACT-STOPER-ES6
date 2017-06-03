@@ -58,8 +58,8 @@ class Stopwatch extends React.Component {
 
     LabClick() {
         this.setState({
-      laps: this.state.laps.concat([this.state.currentTime])
-    })
+            laps: this.state.laps.concat([this.state.currentTime])
+        })
     }
 
     render() {
